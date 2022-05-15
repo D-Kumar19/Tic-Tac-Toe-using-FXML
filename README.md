@@ -19,6 +19,7 @@
 - The **GAME IS OVER** when a **ROW**, a **COLUMN**, a **DIAGONAL** or an **ANTI-DIAGONAL** contains **3 STONES OF THE SAME COLOR**.
 - The Three Stones do not have to be adjacent.
 - The Player to which these Stones belong **LOSES THE GAME**.
+- If the Game Ends in a **Draw** you can **PLAY AGAIN**.
 
 ### At the End of the Game:
 - The Program will store the **RESULT OF THE GAME**.
