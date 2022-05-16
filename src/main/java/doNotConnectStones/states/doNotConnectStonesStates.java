@@ -1,12 +1,16 @@
 package doNotConnectStones.states;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.IOException;
 import java.util.Scanner;
 
+@Slf4j
 public class doNotConnectStonesStates {
     private final char[][] gameBoard = new char[5][5];
 
     public void initializeBoard(){
+        log.info("Inside initializeBoard method!");
         for (int i = 0; i < gameBoard.length; i++){
             for(int j = 0; j < gameBoard.length; j++){
                 gameBoard[i][j] = '-';
@@ -15,6 +19,7 @@ public class doNotConnectStonesStates {
     }
 
     public void stateAfterMove(){
+        log.info("Inside stateAfterMove method!");
         for (char[] chars : gameBoard) {
             for (int j = 0; j < gameBoard.length; j++) {
                 System.out.print(chars[j] + " ");
@@ -24,10 +29,12 @@ public class doNotConnectStonesStates {
     }
 
     public boolean isGameFinished(int row, int col){
+        log.info("Inside isGameFinished method!");
         return doesHorizontalMatches(row, col) || doesVerticalMatches(row, col) || doesDiagonalMatches(row, col) || doesAntiDiagonalMatches(row, col);
     }
 
     private boolean doesHorizontalMatches(int row, int col) {
+        log.info("Inside doesHorizontalMatches method!");
         if (row - 2 >= 0)
             if (gameBoard[row - 2][col] == gameBoard[row - 1][col] && gameBoard[row - 1][col] == gameBoard[row][col])
                 return true;
@@ -40,6 +47,7 @@ public class doNotConnectStonesStates {
     }
 
     private boolean doesVerticalMatches(int row, int col){
+        log.info("Inside doesVerticalMatches method!");
         if (col - 2 >= 0)
             if (gameBoard[row][col - 2] == gameBoard[row][col - 1] && gameBoard[row][col - 1] == gameBoard[row][col])
                 return true;
@@ -51,6 +59,7 @@ public class doNotConnectStonesStates {
         return false;
     }
     private boolean doesDiagonalMatches(int row, int col){
+        log.info("Inside doesDiagonalMatches method!");
         if (row - 2 >= 0 && col - 2 >= 0)
             if (gameBoard[row - 2][col - 2] == gameBoard[row - 1][col - 1] && gameBoard[row - 1][col - 1] == gameBoard[row][col])
                 return true;
@@ -62,6 +71,7 @@ public class doNotConnectStonesStates {
         return false;
     }
     private boolean doesAntiDiagonalMatches(int row, int col){
+        log.info("Inside doesAntiDiagonalMatches method!");
         if (row - 2 >= 0 && col + 2 <= 4)
             if (gameBoard[row - 2][col + 2] == gameBoard[row - 1][col + 1] && gameBoard[row - 1][col + 1] == gameBoard[row][col])
                 return true;
@@ -74,10 +84,12 @@ public class doNotConnectStonesStates {
     }
 
     public boolean isMoveValid(int row, int col){
+        log.info("Inside isMoveValid method!");
         return gameBoard[row][col] == '-';
     }
 
     public boolean isGameBoardFilled(){
+        log.info("Inside isGameBoardFilled method!");
         for (char[] chars : gameBoard) {
             for (int j = 0; j < gameBoard.length; j++) {
                 if (chars[j] != 'B' && chars[j] != 'R') {
@@ -89,6 +101,7 @@ public class doNotConnectStonesStates {
     }
 
     public void setOnBoard(int row, int col, char stone){
+        log.info("Inside setOnBoard method!");
         gameBoard[row][col] = stone;
     }
 
@@ -121,8 +134,8 @@ public class doNotConnectStonesStates {
             }while(testModel.isGameBoardFilled() || testModel.isMoveValid(row, col));
 
         }while(testModel.isGameBoardFilled() || !testModel.isGameFinished(row, col));
-
-        System.out.println("\nFinal States: ");
+        log.info("Game Over!");
+        log.info("Board after gameOver state!");
         testModel.stateAfterMove();
     }
 }
