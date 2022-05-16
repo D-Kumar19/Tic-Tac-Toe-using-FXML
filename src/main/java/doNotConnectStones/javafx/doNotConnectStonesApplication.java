@@ -17,6 +17,7 @@ public class doNotConnectStonesApplication extends Application {
         Parent mainMenuScene = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/mainMenu.fxml")));
         mainMenuStage.setTitle("Do-not Connect Stones Main Menu");
         mainMenuStage.setScene(new Scene(mainMenuScene));
+        mainMenuStage.setResizable(false);
         mainMenuStage.show();
     }
 }
