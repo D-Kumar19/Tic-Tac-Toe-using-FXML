@@ -1,18 +1,19 @@
 package doNotConnectStones.javafx;
 
-import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
+import java.util.Objects;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.scene.Parent;
+import javafx.fxml.FXMLLoader;
 import lombok.extern.slf4j.Slf4j;
-import java.util.Objects;
+import javafx.application.Application;
 
 @Slf4j
 public class doNotConnectStonesApplication extends Application {
 
     @Override
     public void start(Stage mainMenuStage) throws Exception{
+
         log.info("Loading Main Menu Scene!");
         Parent mainMenuScene = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/mainMenu.fxml")));
         mainMenuStage.setTitle("Do-not Connect Stones Main Menu");

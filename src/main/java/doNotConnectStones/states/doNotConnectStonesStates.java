@@ -1,16 +1,14 @@
 package doNotConnectStones.states;
 
-import lombok.extern.slf4j.Slf4j;
-
-import java.io.IOException;
 import java.util.Scanner;
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class doNotConnectStonesStates {
     private final char[][] gameBoard = new char[5][5];
 
-    public void initializeBoard(){
-        log.info("Inside initializeBoard method!");
+    public doNotConnectStonesStates(){
+        log.debug("Model of the Board Initialized....");
         for (int i = 0; i < gameBoard.length; i++){
             for(int j = 0; j < gameBoard.length; j++){
                 gameBoard[i][j] = '-';
@@ -19,22 +17,22 @@ public class doNotConnectStonesStates {
     }
 
     public void stateAfterMove(){
-        log.info("Inside stateAfterMove method!");
+        System.out.print("Game States: " );
         for (char[] chars : gameBoard) {
             for (int j = 0; j < gameBoard.length; j++) {
                 System.out.print(chars[j] + " ");
             }
-            System.out.println();
+            System.out.print("   ");
         }
+        System.out.println();
     }
 
     public boolean isGameFinished(int row, int col){
-        log.info("Inside isGameFinished method!");
+        log.debug("Checking if Game has Finished or not....");
         return doesHorizontalMatches(row, col) || doesVerticalMatches(row, col) || doesDiagonalMatches(row, col) || doesAntiDiagonalMatches(row, col);
     }
 
     private boolean doesHorizontalMatches(int row, int col) {
-        log.info("Inside doesHorizontalMatches method!");
         if (row - 2 >= 0)
             if (gameBoard[row - 2][col] == gameBoard[row - 1][col] && gameBoard[row - 1][col] == gameBoard[row][col])
                 return true;
@@ -47,7 +45,6 @@ public class doNotConnectStonesStates {
     }
 
     private boolean doesVerticalMatches(int row, int col){
-        log.info("Inside doesVerticalMatches method!");
         if (col - 2 >= 0)
             if (gameBoard[row][col - 2] == gameBoard[row][col - 1] && gameBoard[row][col - 1] == gameBoard[row][col])
                 return true;
@@ -59,7 +56,6 @@ public class doNotConnectStonesStates {
         return false;
     }
     private boolean doesDiagonalMatches(int row, int col){
-        log.info("Inside doesDiagonalMatches method!");
         if (row - 2 >= 0 && col - 2 >= 0)
             if (gameBoard[row - 2][col - 2] == gameBoard[row - 1][col - 1] && gameBoard[row - 1][col - 1] == gameBoard[row][col])
                 return true;
@@ -71,7 +67,6 @@ public class doNotConnectStonesStates {
         return false;
     }
     private boolean doesAntiDiagonalMatches(int row, int col){
-        log.info("Inside doesAntiDiagonalMatches method!");
         if (row - 2 >= 0 && col + 2 <= 4)
             if (gameBoard[row - 2][col + 2] == gameBoard[row - 1][col + 1] && gameBoard[row - 1][col + 1] == gameBoard[row][col])
                 return true;
@@ -84,12 +79,12 @@ public class doNotConnectStonesStates {
     }
 
     public boolean isMoveValid(int row, int col){
-        log.info("Inside isMoveValid method!");
+        log.debug("Checking if Grid is Empty or not....");
         return gameBoard[row][col] == '-';
     }
 
     public boolean isGameBoardFilled(){
-        log.info("Inside isGameBoardFilled method!");
+        log.debug("Checking if Board is Empty or not....");
         for (char[] chars : gameBoard) {
             for (int j = 0; j < gameBoard.length; j++) {
                 if (chars[j] != 'B' && chars[j] != 'R') {
@@ -101,16 +96,20 @@ public class doNotConnectStonesStates {
     }
 
     public void setOnBoard(int row, int col, char stone){
-        log.info("Inside setOnBoard method!");
+        if(stone == 'R') {
+            log.info("Setting a Red Stone on Board!");
+        }
+        else if(stone == 'B'){
+            log.info("Setting a Blue Stone on Board!");
+        }
         gameBoard[row][col] = stone;
     }
 
-    public static void main(String[] args) throws IOException, IOException {
+    public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
-        int row = 0; int col = 0, i = 1;
+        int row; int col, i = 1;
 
         doNotConnectStonesStates testModel = new doNotConnectStonesStates();
-        testModel.initializeBoard();
 
         do{
             testModel.stateAfterMove();
