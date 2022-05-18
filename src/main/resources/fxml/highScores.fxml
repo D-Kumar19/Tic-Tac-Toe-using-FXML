@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="446.0" prefWidth="715.0" style="-fx-background-color: E3FCBF;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="446.0" prefWidth="715.0" style="-fx-background-color: E3FCBF;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="doNotConnectStones.javafx.controller.highScoreController">
    <children>
       <Text fill="#2155cd" layoutX="84.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DO NOT CONNECT STONES" textAlignment="CENTER">
          <font>
@@ -48,7 +48,7 @@
             <InnerShadow />
          </effect>
       </TableView>
-      <Button contentDisplay="CENTER" layoutX="482.0" layoutY="384.0" mnemonicParsing="false" style="-fx-background-color: 4C0027;" text="Finish" textFill="#711a75">
+      <Button fx:id="finishButton" contentDisplay="CENTER" layoutX="482.0" layoutY="384.0" mnemonicParsing="false" onAction="#finishButtonController" style="-fx-background-color: 4C0027;" text="Finish" textFill="#711a75">
          <font>
             <Font name="System Bold Italic" size="20.0" />
          </font>
@@ -56,7 +56,7 @@
             <InnerShadow />
          </effect>
       </Button>
-      <Button contentDisplay="CENTER" layoutX="164.0" layoutY="384.0" mnemonicParsing="false" style="-fx-background-color: 4C0027;" text="New Game" textFill="#711a75">
+      <Button fx:id="newGameButton" contentDisplay="CENTER" layoutX="164.0" layoutY="384.0" mnemonicParsing="false" onAction="#newGameButtonController" style="-fx-background-color: 4C0027;" text="New Game" textFill="#711a75">
          <font>
             <Font name="System Bold Italic" size="20.0" />
          </font>

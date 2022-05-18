@@ -158,7 +158,7 @@ public class gameController {
                 circle.setFill(findPlayerColor((Color) circle.getFill(), row, col));
                 numberOfMoves.setText(String.valueOf(countSteps));
             } else {
-                log.info("User just clicked on [{},{}] cell and isMoveValid is false", row, col);
+                log.warn("User just clicked on [{},{}] cell and isMoveValid is false", row, col);
             }
 
             log.info("States after placing a Stone:");
@@ -169,7 +169,7 @@ public class gameController {
             }
         }
         else{
-                log.warn("User just clicked on [{},{}] cell but Game is already Finished", row, col);
+                log.warn("User just clicked on [{},{}] cell but Game has already Finished! And we have a Winner", row, col);
         }
     }
 
