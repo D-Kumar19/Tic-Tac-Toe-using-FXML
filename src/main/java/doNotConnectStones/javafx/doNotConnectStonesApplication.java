@@ -1,11 +1,14 @@
 package doNotConnectStones.javafx;
 
 import java.util.Objects;
+
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.fxml.FXMLLoader;
+
 import lombok.extern.slf4j.Slf4j;
+
 import javafx.application.Application;
 
 @Slf4j

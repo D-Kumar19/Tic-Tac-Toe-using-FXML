@@ -8,9 +8,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="429.0" prefWidth="660.0" style="-fx-background-color: E3FCBF;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="doNotConnectStones.javafx.controller.mainMenuController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="376.0" prefWidth="660.0" style="-fx-background-color: E3FCBF;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="doNotConnectStones.javafx.controller.mainMenuController">
    <children>
-      <Text fill="#2155cd" layoutX="57.0" layoutY="93.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DO NOT CONNECT STONES" wrappingWidth="547.0">
+      <Text fill="#2155cd" layoutX="57.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DO NOT CONNECT STONES" wrappingWidth="547.0">
          <font>
             <Font name="Bernard MT Condensed" size="60.0" />
          </font>
@@ -37,12 +37,7 @@
             <InnerShadow />
          </effect>
       </TextField>
-      <Text fx:id="player1NameMissingLabel" fill="RED" layoutX="298.0" layoutY="215.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="261.419921875">
-         <font>
-            <Font name="Agency FB" size="25.0" />
-         </font>
-      </Text>
-      <Text fill="#06113c" layoutX="57.0" layoutY="284.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player Two Name" wrappingWidth="248.0">
+      <Text fill="#06113c" layoutX="57.0" layoutY="244.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player Two Name" wrappingWidth="248.0">
          <font>
             <Font name="Agency FB" size="40.0" />
          </font>
@@ -50,7 +45,7 @@
             <Glow />
          </effect>
       </Text>
-      <TextField fx:id="player2Name" alignment="CENTER" layoutX="298.0" layoutY="243.0" prefHeight="53.0" prefWidth="337.0">
+      <TextField fx:id="player2Name" alignment="CENTER" layoutX="298.0" layoutY="202.0" prefHeight="53.0" prefWidth="337.0">
          <font>
             <Font name="Cambria" size="20.0" />
          </font>
@@ -58,12 +53,19 @@
             <InnerShadow />
          </effect>
       </TextField>
-      <Text fx:id="player2NameMissingLabel" fill="RED" layoutX="298.0" layoutY="330.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="261.419921875">
+      <Text fill="#711a75" focusTraversable="true" layoutX="288.0" layoutY="332.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="Are you Ready?" textAlignment="CENTER" wrappingWidth="163.0">
          <font>
-            <Font name="Agency FB" size="25.0" />
+            <Font name="System Bold Italic" size="20.0" />
          </font>
+         <effect>
+            <Glow>
+               <input>
+                  <InnerShadow />
+               </input>
+            </Glow>
+         </effect>
       </Text>
-      <Button alignment="CENTER" contentDisplay="CENTER" layoutX="228.0" layoutY="351.0" mnemonicParsing="false" onAction="#switchMainMenuToGameScene" prefHeight="64.0" prefWidth="140.0" style="-fx-background-color: 4C0027;" text="Start Game" textAlignment="CENTER" textFill="#711a75" textOverrun="LEADING_ELLIPSIS">
+      <Button alignment="CENTER" contentDisplay="CENTER" layoutX="467.0" layoutY="292.0" mnemonicParsing="false" onAction="#switchMainMenuToGameScene" prefHeight="64.0" prefWidth="140.0" style="-fx-background-color: 4C0027;" text="Start Game" textAlignment="CENTER" textFill="#711a75" textOverrun="LEADING_ELLIPSIS">
          <font>
             <Font name="System Bold Italic" size="20.0" />
          </font>
