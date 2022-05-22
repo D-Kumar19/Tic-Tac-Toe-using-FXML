@@ -89,4 +89,17 @@ public class mainMenuController {
         gameStage.setResizable(false);
         gameStage.show();
     }
+
+    public void changeMainMenuSceneToRulesScene(ActionEvent actionEvent) throws IOException {
+        fxmlLoader.setLocation(getClass().getResource("/fxml/gameRules.fxml"));
+        log.info("Rules Button was clicked....");
+        log.info("Loading Game Rules....");
+
+        Parent gameScene = fxmlLoader.load();
+        Stage gameStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        gameStage.setTitle("Do-not Connect Stones Game Rules");
+        gameStage.setScene(new Scene(gameScene));
+        gameStage.setResizable(false);
+        gameStage.show();
+    }
 }

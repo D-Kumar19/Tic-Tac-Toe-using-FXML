@@ -14,7 +14,7 @@
 ### During the Game:
 - At Start the Board will be **EMPTY**. 
 - Game will Start with **PLAYER NUMBER # 01** starting the Game will **RED STONE** followed by **PLAYER # 02** which will move with **BLUE STONE**.
-- During the Game you can **RESET** to **INITIAL POSITION**. But once Game is started you can't **END IT IN BETWEEN** until we have a **WINNER**.
+- During the Game you can **RESET** to **INITIAL POSITION** or **GAVE UP** in-between.
 - But once, Game is **FINISHED** you can't **RESET** as we already have a **WINNER**.
 
 ### How Game Ends:
