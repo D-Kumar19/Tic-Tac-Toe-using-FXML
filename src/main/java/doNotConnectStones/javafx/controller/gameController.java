@@ -1,17 +1,22 @@
 package doNotConnectStones.javafx.controller;
 
-import java.io.File;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import lombok.Data;
+
 import java.util.Objects;
+import java.io.IOException;
+import java.time.ZonedDateTime;
+
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import java.io.IOException;
 import javafx.scene.Parent;
 import javafx.fxml.FXMLLoader;
-import java.time.ZonedDateTime;
 import javafx.event.ActionEvent;
 import javafx.scene.paint.Color;
+
 import lombok.extern.slf4j.Slf4j;
 import javafx.scene.shape.Circle;
 import javafx.application.Platform;
@@ -21,59 +26,50 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import java.io.FileNotFoundException;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+
 import doNotConnectStones.resultsController.fieldsToStore;
 import doNotConnectStones.states.doNotConnectStonesStates;
 import doNotConnectStones.resultsController.resultsRepository;
 
+@Data
 @Slf4j
 public class gameController {
 
-    private final FXMLLoader fxmlLoader = new FXMLLoader();
-
-    private int countSteps = 0;
-
     private int playerTurn = 0;
-
     private String winnerName;
-
     private String player1Name;
-
     private String player2Name;
-
-    private boolean gameOver = false;
-
-    public doNotConnectStonesStates gameStates;
-
-    public void setPlayer1Name(String player1Name) {
-        this.player1Name = player1Name;
-    }
-
-    public void setPlayer2Name(String player2Name) {
-        this.player2Name = player2Name;
-    }
-
     private ZonedDateTime zonedDateTime;
+    public doNotConnectStonesStates gameStates;
+    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+    private final FXMLLoader fxmlLoader = new FXMLLoader();
+    private BooleanProperty isGameOver = new SimpleBooleanProperty();
+    private IntegerProperty player1Steps = new SimpleIntegerProperty();
+    private IntegerProperty player2Steps = new SimpleIntegerProperty();
+    private IntegerProperty totalMoves = new SimpleIntegerProperty();
 
     @FXML
     private GridPane boardGrid;
-
     @FXML
     private Button resetButton;
-
     @FXML
     private Button finishButton;
-
     @FXML
     private javafx.scene.text.Text numberOfMoves;
-
     @FXML
     private javafx.scene.text.Text welcomeText;
+    @FXML
+    private javafx.scene.text.Text playerTurnText;
 
     @FXML
     private void initialize() {
         zonedDateTime = ZonedDateTime.now();
-        log.debug("Grid of the Game Initialized....");
-        finishButton.setDisable(true);
+        log.debug("Grid of the Game Populated....");
+
         for (int i = 0; i < boardGrid.getRowCount(); i++) {
             for (int j = 0; j < boardGrid.getRowCount(); j++) {
                 var square = createSquare();
@@ -94,22 +90,29 @@ public class gameController {
     }
 
     public void resetUserDetails() {
-        log.debug("Re-set all values to Default.");
+        log.debug("Re-setting all entities to Default.");
         gameStates = new doNotConnectStonesStates();
-        finishButton.setDisable(true);
-        countSteps = 0;
+
         playerTurn = 0;
-        gameOver = false;
-        numberOfMoves.setText(String.valueOf(countSteps));
+        totalMoves.setValue(0);
+        player1Steps.setValue(0);
+        player2Steps.setValue(0);
+        isGameOver.setValue(false);
+        finishButton.setText("Gave Up");
+        numberOfMoves.setText(String.valueOf(totalMoves.get()));
+
+        log.info("Game has been Successfully Reset!");
         log.info("New Game State is:");
         gameStates.stateAfterMove();
+
         Platform.runLater(() -> welcomeText.setText("Good Luck " + player1Name + " and " + player2Name + "!"));
+        Platform.runLater(() -> playerTurnText.setText(player1Name + "'s Turn!"));
     }
 
     public void checkIfGameFinished(int row, int col, int playerTurn) {
         if (gameStates.isGameFinished(row, col)) {
-            gameOver = true;
-            log.debug("Game Over!");
+            log.info("Game Over!");
+            isGameOver.setValue(true);
 
             if (playerTurn == 0) {
                 winnerName = player1Name;
@@ -118,22 +121,28 @@ public class gameController {
             }
 
             log.info("Winner of this Game is: {}", winnerName);
-            log.info("{} has Won the Game in {} Steps.", winnerName, countSteps);
+            log.info("{} has Won the Game in {} Steps.", winnerName, (totalMoves.get()));
             welcomeText.setText("Winner of the Game is " + winnerName + "!");
-            log.debug("Storing Data to a Database....");
+
+            log.debug("Storing Data into a Database....");
             storeUserInformation();
+
+            playerTurnText.setText("");
             resetButton.setDisable(true);
             finishButton.setDisable(false);
+            finishButton.setText("Finish");
         }
     }
 
     public void checkIfGameTied() {
         if (gameStates.isGameBoardFilled()) {
-            gameOver = true;
+            isGameOver.setValue(true);
             log.info("It is a Tie between {} and {}!", player1Name, player2Name);
-            welcomeText.setText("Game has been Tied. Congratulations both!");
+
+            playerTurnText.setText("");
+            finishButton.setText("Finish");
             resetButton.setText("Re-Match");
-            finishButton.setDisable(false);
+            welcomeText.setText("Game has Tied. Congratulations both!");
         }
     }
 
@@ -145,9 +154,8 @@ public class gameController {
                     var circle = (Circle) ((StackPane) node).getChildren().get(0);
                     circle.setFill(Color.TRANSPARENT);
                 });
-        log.info("Resetting the Game....");
-        log.debug("New Game State is:");
-        gameStates.stateAfterMove();
+
+        log.info("Resetting the Nodes to Default....");
     }
 
     private void handleMouseClick(MouseEvent mouseEvent) {
@@ -155,66 +163,109 @@ public class gameController {
         int row = GridPane.getRowIndex((Node) mouseEvent.getSource());
         int col = GridPane.getColumnIndex((Node) mouseEvent.getSource());
 
-        if (!gameOver) {
+        if (!isGameOver.getValue()) {
             if (gameStates.isMoveValid(row, col)) {
                 log.info("User just clicked on [{},{}] cell and isMoveValid is true", row, col);
                 var circle = (Circle) square.getChildren().get(0);
                 circle.setFill(findPlayerColor((Color) circle.getFill(), row, col));
-                numberOfMoves.setText(String.valueOf(countSteps));
+
+                log.info("States after placing a Stone:");
+                gameStates.stateAfterMove();
             } else {
                 log.warn("User just clicked on [{},{}] cell and isMoveValid is false", row, col);
             }
 
-            log.info("States after placing a Stone:");
-            gameStates.stateAfterMove();
-            // checkIfGameFinished(row, col, playerTurn);
-            if(!gameOver) {
+            checkIfGameFinished(row, col, playerTurn);
+            if(!isGameOver.getValue()) {
                 checkIfGameTied();
             }
         }
         else{
-                log.warn("User just clicked on [{},{}] cell but Game has already Finished! And we have a Winner", row, col);
+                log.warn("User just clicked on [{},{}] cell but Game has already Finished!", row, col);
         }
     }
 
     private Color findPlayerColor(Color color, int row, int col) {
         if (playerTurn == 0) {
-            countSteps += 1;
-            gameStates.setOnBoard(row, col, 'R');
             playerTurn = 1;
             color = Color.RED;
+            gameStates.setOnBoard(row, col, 'R');
+            playerTurnText.setText(player2Name + "'s Turn!");
+            player1Steps.setValue(player1Steps.getValue() + 1);
+
         } else if (playerTurn == 1) {
-            countSteps += 1;
-            gameStates.setOnBoard(row, col, 'B');
             playerTurn = 0;
             color = Color.BLUE;
+            gameStates.setOnBoard(row, col, 'B');
+            playerTurnText.setText(player1Name + "'s Turn!");
+            player2Steps.setValue(player2Steps.getValue() + 1);
         }
+        totalMoves.setValue(totalMoves.get() + 1);
+        numberOfMoves.setText(String.valueOf(totalMoves.get()));
+
         return color;
     }
 
     public void resetButtonController(ActionEvent actionEvent) {
         String textOfButton = resetButton.getText();
         if (textOfButton.equals("Reset")) {
-            log.debug("Reset Button was Clicked....");
-            log.info("Resetting Game....");
-        } else if (textOfButton.equals("Re-Match")) {
-            log.debug("Re-Match Button was Clicked....");
-            log.info("Setting Board for Re-Match....");
-        }
+            log.info("Reset Button was Clicked....");
+            log.debug("Resetting Game....");
 
-        log.debug("Final States before Re-Match:");
-        gameStates.stateAfterMove();
+            alert.setTitle("Error!");
+            alert.setHeaderText("ARE YOU SURE YOU WANT TO RESET THE GAME!");
+            alert.setContentText("If you click 'OK' your progress will not be saved!");
+            alert.showAndWait();
+
+            if (alert.getResult() == ButtonType.OK) {
+                log.info("Final States before Reset:");
+                gameStates.stateAfterMove();
+                implementResetting();
+            }
+            else{
+                log.info("Game wasn't Reset....");
+            }
+        } else if (textOfButton.equals("Re-Match")) {
+            log.info("Re-Match Button was Clicked....");
+            log.info("Setting Board for Re-Match....");
+            implementResetting();
+        }
+    }
+
+    public void implementResetting(){
         clearAllNodes();
         resetUserDetails();
     }
 
     public void finishButtonController(ActionEvent actionEvent) throws IOException {
         String textOfButton = finishButton.getText();
-        log.debug("{} Button was Clicked", textOfButton);
-        log.info("The Game has Finished....");
-        log.debug("Loading highScore Table....");
+        if (textOfButton.equals("Gave Up")) {
+            log.info("Gave Up Button was Clicked....");
+            log.debug("Game Given up....");
 
-        gameOver = true;
+            alert.setTitle("Error!");
+            alert.setHeaderText("ARE YOU SURE YOU WANT TO LEAVE THE GAME IN-BETWEEN!");
+            alert.setContentText("If you click 'OK' your progress will not be saved!");
+            alert.showAndWait();
+
+            if (alert.getResult() == ButtonType.OK) {
+                implementFinishing(actionEvent);
+            }
+            else{
+                log.info("Game has not Finished....");
+            }
+
+        } else if (textOfButton.equals("Finish")) {
+            log.info("Finish button was Clicked....");
+            log.debug("Finishing Game....");
+            implementFinishing(actionEvent);
+        }
+    }
+
+    public void implementFinishing(ActionEvent actionEvent) throws IOException {
+        log.debug("Loading highScore Table....");
+        isGameOver.setValue(true);
+
         fxmlLoader.setLocation(getClass().getResource("/fxml/highScores.fxml"));
         Parent highScoreScene = fxmlLoader.load();
         Stage highScoreStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
@@ -225,35 +276,33 @@ public class gameController {
     }
 
     private void storeUserInformation(){
-        if(gameOver){
+        if(isGameOver.get()){
             var repository = new resultsRepository();
             var result = fieldsToStore.builder()
-                    .storePlayer1Name(player1Name)
-                    .storePlayer2Name(player2Name)
-                    .storeWinnerName(winnerName)
-                    .storeTotalMoves(countSteps)
-                    .storeZonedDateTime(zonedDateTime)
+                    .player1Name(player1Name)
+                    .player2Name(player2Name)
+                    .winnerName(winnerName)
+                    .player1Moves(player1Steps.get())
+                    .player2Moves(player2Steps.get())
+                    .totalMoves(totalMoves.get())
+                    .zonedDateTime(zonedDateTime)
                     .build();
 
             log.info("Loading Data into Database....");
-
-            var file = new File("playerResultsFile.json");
             try{
-                repository.loadFromFile(file);
-                log.info("A previous File Found. Storing Data in the File....");
-            } catch (FileNotFoundException e){
-                log.warn("No Previous File Found!");
+                repository.loadFromFile(resultsRepository.file);
+                log.info("Previous File Found. Storing Data in the Previous File....");
+            }catch(FileNotFoundException e){
+                log.info("No previous file found!");
             } catch (IOException e) {
-                log.warn("Unable to Open the File!");
+                log.error("Unable to open previous file!");
             }
-
             repository.add(result);
-            try{
-                repository.saveToFile(file);
+            try {
+                repository.saveToFile(resultsRepository.file);
                 log.info("Results added to File Successfully!");
-            }
-            catch(IOException e){
-                log.warn("Unable to Save Results to the File!");
+            } catch (IOException e){
+                log.error("Unable to Save results to file!");
             }
         }
     }

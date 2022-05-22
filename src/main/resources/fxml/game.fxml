@@ -10,9 +10,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="769.0" prefWidth="756.0" style="-fx-background-color: E3FCBF;" stylesheets="@UI.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="doNotConnectStones.javafx.controller.gameController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="734.0" prefWidth="723.0" style="-fx-background-color: E3FCBF;" stylesheets="@UI.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="doNotConnectStones.javafx.controller.gameController">
    <children>
-      <Text fill="#2155cd" layoutX="106.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DO NOT CONNECT STONES" textAlignment="CENTER">
+      <Text fill="#2155cd" layoutX="89.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DO NOT CONNECT STONES" textAlignment="CENTER">
          <font>
             <Font name="Bernard MT Condensed" size="60.0" />
          </font>
@@ -24,7 +24,7 @@
             </InnerShadow>
          </effect>
       </Text>
-      <Text fx:id="welcomeText" fill="#3f0071" layoutX="7.0" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="742.623046875">
+      <Text fx:id="welcomeText" fill="#3f0071" layoutX="7.0" layoutY="91.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="709.0">
          <font>
             <Font name="Rockwell" size="21.0" />
          </font>
@@ -36,7 +36,19 @@
             </InnerShadow>
          </effect>
       </Text>
-      <GridPane fx:id="boardGrid" gridLinesVisible="true" layoutY="113.0" prefHeight="555.0" prefWidth="756.0" stylesheets="@UI.css">
+      <Text fx:id="playerTurnText" fill="#3f0071" layoutX="7.0" layoutY="122.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="709.0">
+         <font>
+            <Font name="Rockwell" size="21.0" />
+         </font>
+         <effect>
+            <InnerShadow>
+               <input>
+                  <Glow />
+               </input>
+            </InnerShadow>
+         </effect>
+      </Text>
+      <GridPane fx:id="boardGrid" gridLinesVisible="true" layoutX="7.0" layoutY="145.0" prefHeight="524.0" prefWidth="709.0" stylesheets="@UI.css">
         <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -59,15 +71,15 @@
             </Glow>
          </effect>
       </GridPane>
-      <Text fill="#06113c" layoutX="121.0" layoutY="705.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Number of Moves" textAlignment="CENTER" wrappingWidth="282.912109375">
+      <Text fill="#06113c" layoutX="259.0" layoutY="706.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Moves" textAlignment="CENTER" wrappingWidth="133.912109375">
          <font>
-            <Font name="Sitka Small Bold Italic" size="30.0" />
+            <Font name="Sitka Small Bold" size="30.0" />
          </font>
          <effect>
             <Glow />
          </effect>
       </Text>
-      <Text fx:id="numberOfMoves" fill="#00ffc6" layoutX="527.0" layoutY="713.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="56.669921875">
+      <Text fx:id="numberOfMoves" fill="#00ffc6" layoutX="393.0" layoutY="710.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="56.669921875">
          <font>
             <Font name="Bodoni MT" size="40.0" />
          </font>
@@ -79,7 +91,7 @@
             </InnerShadow>
          </effect>
       </Text>
-      <Button fx:id="resetButton" alignment="CENTER" contentDisplay="CENTER" layoutX="225.0" layoutY="725.0" mnemonicParsing="false" onAction="#resetButtonController" style="-fx-background-color: 4C0027;" text="Reset" textFill="#711a75">
+      <Button fx:id="resetButton" alignment="CENTER" contentDisplay="CENTER" layoutX="131.0" layoutY="675.0" mnemonicParsing="false" onAction="#resetButtonController" style="-fx-background-color: 4C0027;" text="Reset" textFill="#711a75">
          <font>
             <Font name="System Bold Italic" size="20.0" />
          </font>
@@ -87,7 +99,7 @@
             <InnerShadow />
          </effect>
       </Button>
-      <Button fx:id="finishButton" alignment="CENTER" contentDisplay="CENTER" layoutX="510.0" layoutY="725.0" mnemonicParsing="false" onAction="#finishButtonController" prefHeight="44.0" prefWidth="91.0" style="-fx-background-color: 4C0027;" text="Finish" textFill="#711a75">
+      <Button fx:id="finishButton" alignment="CENTER" contentDisplay="CENTER" layoutX="488.0" layoutY="676.0" mnemonicParsing="false" onAction="#finishButtonController" prefHeight="44.0" prefWidth="114.0" style="-fx-background-color: 4C0027;" text="Gave up" textFill="#711a75">
          <font>
             <Font name="System Bold Italic" size="20.0" />
          </font>

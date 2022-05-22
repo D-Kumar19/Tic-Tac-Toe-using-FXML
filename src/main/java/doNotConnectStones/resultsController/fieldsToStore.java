@@ -2,15 +2,17 @@ package doNotConnectStones.resultsController;
 
 import lombok.Data;
 import lombok.Builder;
+
 import java.time.ZonedDateTime;
 
-@Builder
 @Data
+@Builder
 public class fieldsToStore {
-    private String storePlayer1Name;
-    private String storePlayer2Name;
-    private String storeWinnerName;
-    private int storeTotalMoves;
-    private ZonedDateTime storeZonedDateTime;
-
+    private String player1Name;
+    private String player2Name;
+    private String winnerName;
+    private int player1Moves;
+    private int player2Moves;
+    private int totalMoves;
+    private ZonedDateTime zonedDateTime;
 }
