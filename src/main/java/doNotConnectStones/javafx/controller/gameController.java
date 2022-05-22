@@ -1,8 +1,9 @@
 package doNotConnectStones.javafx.controller;
 
+import java.io.File;
+import java.util.Objects;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import java.util.Objects;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import java.io.IOException;
@@ -16,11 +17,13 @@ import javafx.scene.shape.Circle;
 import javafx.application.Platform;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
-import java.time.format.FormatStyle;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
-import java.time.format.DateTimeFormatter;
+import java.io.FileNotFoundException;
+
+import doNotConnectStones.resultsController.fieldsToStore;
 import doNotConnectStones.states.doNotConnectStonesStates;
+import doNotConnectStones.resultsController.resultsRepository;
 
 @Slf4j
 public class gameController {
@@ -49,7 +52,7 @@ public class gameController {
         this.player2Name = player2Name;
     }
 
-    private final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.FULL);
+    private ZonedDateTime zonedDateTime;
 
     @FXML
     private GridPane boardGrid;
@@ -68,6 +71,7 @@ public class gameController {
 
     @FXML
     private void initialize() {
+        zonedDateTime = ZonedDateTime.now();
         log.debug("Grid of the Game Initialized....");
         finishButton.setDisable(true);
         for (int i = 0; i < boardGrid.getRowCount(); i++) {
@@ -163,7 +167,7 @@ public class gameController {
 
             log.info("States after placing a Stone:");
             gameStates.stateAfterMove();
-            checkIfGameFinished(row, col, playerTurn);
+            // checkIfGameFinished(row, col, playerTurn);
             if(!gameOver) {
                 checkIfGameTied();
             }
@@ -222,12 +226,35 @@ public class gameController {
 
     private void storeUserInformation(){
         if(gameOver){
-            log.info("Time when the Game was Played: {}", ZonedDateTime.now().format(dateTimeFormatter));
-            log.info("Name of the Player # 01 is: {}", player1Name);
-            log.info("Name of the Player # 02 is: {}", player2Name);
-            log.info("Name of the Winning Player is: {}", winnerName);
-            log.info("Total Number of Steps taken to Win the Game are: {}", countSteps);
+            var repository = new resultsRepository();
+            var result = fieldsToStore.builder()
+                    .storePlayer1Name(player1Name)
+                    .storePlayer2Name(player2Name)
+                    .storeWinnerName(winnerName)
+                    .storeTotalMoves(countSteps)
+                    .storeZonedDateTime(zonedDateTime)
+                    .build();
 
+            log.info("Loading Data into Database....");
+
+            var file = new File("playerResultsFile.json");
+            try{
+                repository.loadFromFile(file);
+                log.info("A previous File Found. Storing Data in the File....");
+            } catch (FileNotFoundException e){
+                log.warn("No Previous File Found!");
+            } catch (IOException e) {
+                log.warn("Unable to Open the File!");
+            }
+
+            repository.add(result);
+            try{
+                repository.saveToFile(file);
+                log.info("Results added to File Successfully!");
+            }
+            catch(IOException e){
+                log.warn("Unable to Save Results to the File!");
+            }
         }
     }
 }

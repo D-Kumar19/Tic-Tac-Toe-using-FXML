@@ -3,8 +3,8 @@ package doNotConnectStones.util.repository;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
-import connectStones.util.gson.LocalDateAdapter;
-import connectStones.util.gson.ZonedDateTimeAdapter;
+import doNotConnectStones.util.gson.LocalDateAdapter;
+import doNotConnectStones.util.gson.ZonedDateTimeAdapter;
 
 import java.io.File;
 import java.io.FileReader;
