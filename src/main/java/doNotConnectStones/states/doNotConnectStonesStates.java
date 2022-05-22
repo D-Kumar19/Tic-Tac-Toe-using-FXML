@@ -5,7 +5,9 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class doNotConnectStonesStates {
-    private final char[][] gameBoard = new char[5][5];
+
+    private final int arraySize = 5;
+    private final char[][] gameBoard = new char[arraySize][arraySize];
 
     public doNotConnectStonesStates(){
         log.debug("Model of the Board Initialized....");
@@ -36,10 +38,10 @@ public class doNotConnectStonesStates {
         if (row - 2 >= 0)
             if (gameBoard[row - 2][col] == gameBoard[row - 1][col] && gameBoard[row - 1][col] == gameBoard[row][col])
                 return true;
-        if (row + 2 <= 4)
+        if (row + 2 <= arraySize - 1)
             if (gameBoard[row + 2][col] == gameBoard[row + 1][col] && gameBoard[row + 1][col] == gameBoard[row][col])
                 return true;
-        if (row - 1 >= 0 && row + 1 <= 4)
+        if (row - 1 >= 0 && row + 1 <= arraySize - 1)
             return gameBoard[row - 1][col] == gameBoard[row][col] && gameBoard[row][col] == gameBoard[row + 1][col];
         return false;
     }
@@ -48,10 +50,10 @@ public class doNotConnectStonesStates {
         if (col - 2 >= 0)
             if (gameBoard[row][col - 2] == gameBoard[row][col - 1] && gameBoard[row][col - 1] == gameBoard[row][col])
                 return true;
-        if (col + 2 <= 4)
+        if (col + 2 <= arraySize - 1)
             if (gameBoard[row][col + 2] == gameBoard[row][col + 1] && gameBoard[row][col + 1] == gameBoard[row][col])
                 return true;
-        if (col - 1 >= 0 && col + 1 <= 4)
+        if (col - 1 >= 0 && col + 1 <= arraySize - 1)
             return gameBoard[row][col - 1] == gameBoard[row][col] && gameBoard[row][col] == gameBoard[row][col + 1];
         return false;
     }
@@ -59,21 +61,21 @@ public class doNotConnectStonesStates {
         if (row - 2 >= 0 && col - 2 >= 0)
             if (gameBoard[row - 2][col - 2] == gameBoard[row - 1][col - 1] && gameBoard[row - 1][col - 1] == gameBoard[row][col])
                 return true;
-        if (row + 2 <= 4 && col + 2 <= 4)
+        if (row + 2 <= arraySize - 1 && col + 2 <= arraySize - 1)
             if (gameBoard[row + 2][col + 2] == gameBoard[row + 1][col + 1] && gameBoard[row + 1][col + 1] == gameBoard[row][col])
                 return true;
-        if ((row - 1 >= 0 && row + 1 <= 4) && (col - 1 >= 0 && col + 1 <= 4))
+        if ((row - 1 >= 0 && row + 1 <= arraySize - 1) && (col - 1 >= 0 && col + 1 <= arraySize - 1))
             return gameBoard[row - 1][col - 1] == gameBoard[row][col] && gameBoard[row][col] == gameBoard[row + 1][col + 1];
         return false;
     }
     private boolean doesAntiDiagonalMatches(int row, int col){
-        if (row - 2 >= 0 && col + 2 <= 4)
+        if (row - 2 >= 0 && col + 2 <= arraySize - 1)
             if (gameBoard[row - 2][col + 2] == gameBoard[row - 1][col + 1] && gameBoard[row - 1][col + 1] == gameBoard[row][col])
                 return true;
-        if (row + 2 <= 4 && col - 2 >= 0)
+        if (row + 2 <= arraySize - 1 && col - 2 >= 0)
             if (gameBoard[row + 2][col - 2] == gameBoard[row + 1][col - 1] && gameBoard[row + 1][col - 1] == gameBoard[row][col])
                 return true;
-        if ((row - 1 >= 0 && row + 1 <= 4) && (col - 1 >= 0 && col + 1 <= 4))
+        if ((row - 1 >= 0 && row + 1 <= arraySize - 1) && (col - 1 >= 0 && col + 1 <= arraySize - 1))
             return gameBoard[row - 1][col + 1] == gameBoard[row][col] && gameBoard[row][col] == gameBoard[row + 1][col - 1];
         return false;
     }
