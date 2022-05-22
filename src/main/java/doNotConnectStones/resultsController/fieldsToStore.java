@@ -5,6 +5,9 @@ import lombok.Builder;
 
 import java.time.ZonedDateTime;
 
+/**
+ * This is the Class has all the fields that we need to store when storing user data in the Database.
+ */
 @Data
 @Builder
 public class fieldsToStore {

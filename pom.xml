@@ -4,9 +4,9 @@
         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>hu.unideb.inf</groupId>
-    <artifactId>Project</artifactId>
+    <artifactId>do-not-connect-stones</artifactId>
     <version>1.0</version>
-    <description>End Semester Project</description>
+    <description>It is a 5*5 Board game each of which can contain a piece of stone, and a set of colored (Red and Blue) stones. Initially the Board will be empty. Players will move in turn. In a move, a player must choose an empty cells and put a stone of his or her color into it. The Game is over when a Row, a Column, a Diagonal or an Anti_Diagonal contains 3 stones of the same color. The Player to which these stones belong loses the game.</description>
     <developers>
         <developer>
             <id>VYXEB3</id>
@@ -26,7 +26,7 @@
         <maven.checkstyle.version>3.1.2</maven.checkstyle.version>
         <maven.surefire.version>3.0.0-M6</maven.surefire.version>
         <jacoco.version>0.8.8</jacoco.version>
-        <exec.mainClass><!-- TODO: the main class of your application that contains the main method --></exec.mainClass>
+        <exec.mainClass>doNotConnectStones.javafx.Main</exec.mainClass>
     </properties>
     <dependencies>
         <dependency>
@@ -62,31 +62,25 @@
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-core</artifactId>
-            <version>2.13.2</version>
+            <version>2.17.2</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-slf4j-impl</artifactId>
-            <version>2.13.2</version>
+            <version>2.17.2</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>RELEASE</version>
+            <version>1.18.24</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
             <version>2.9.0</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>1.18.24</version>
             <scope>compile</scope>
         </dependency>
     </dependencies>

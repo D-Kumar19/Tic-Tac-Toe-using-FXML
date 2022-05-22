@@ -1,14 +1,19 @@
 package doNotConnectStones.states;
 
-import java.util.Scanner;
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * This is the Class which will represent the states of the game.
+ */
 @Slf4j
 public class doNotConnectStonesStates {
 
     private final int arraySize = 5;
     private final char[][] gameBoard = new char[arraySize][arraySize];
 
+    /**
+     * This is Constructor for the {@code doNotConnectStates} class.
+     */
     public doNotConnectStonesStates(){
         log.debug("Model of the Board Initialized....");
         for (int i = 0; i < gameBoard.length; i++){
@@ -18,6 +23,9 @@ public class doNotConnectStonesStates {
         }
     }
 
+    /**
+     * This Method will output the states after each move.
+     */
     public void stateAfterMove(){
         System.out.print("Game States: " );
         for (char[] chars : gameBoard) {
@@ -29,6 +37,15 @@ public class doNotConnectStonesStates {
         System.out.println();
     }
 
+    /**
+     * This Method will check if the game has finished or not.
+     * And for that it will call four methods to see any condition is {@code true} or {@code false}.
+     * First method is {@code doesHorizontalMatches}, Second method is {@code doesVerticalMatches},
+     * Third method is {@code doesDiagonalMatches} and last method is {@code doesAntiDiagonalMatches}.
+     * @param row This is the Row Number where we placed the stone.
+     * @param col This is the Column Number where we placed the stone.
+     * @return {@code true} If game has finished. {@code false} If game hasn't finished.
+     */
     public boolean isGameFinished(int row, int col){
         log.debug("Checking if Game has Finished or not....");
         return doesHorizontalMatches(row, col) || doesVerticalMatches(row, col) || doesDiagonalMatches(row, col) || doesAntiDiagonalMatches(row, col);
@@ -57,6 +74,7 @@ public class doNotConnectStonesStates {
             return gameBoard[row][col - 1] == gameBoard[row][col] && gameBoard[row][col] == gameBoard[row][col + 1];
         return false;
     }
+
     private boolean doesDiagonalMatches(int row, int col){
         if (row - 2 >= 0 && col - 2 >= 0)
             if (gameBoard[row - 2][col - 2] == gameBoard[row - 1][col - 1] && gameBoard[row - 1][col - 1] == gameBoard[row][col])
@@ -68,6 +86,7 @@ public class doNotConnectStonesStates {
             return gameBoard[row - 1][col - 1] == gameBoard[row][col] && gameBoard[row][col] == gameBoard[row + 1][col + 1];
         return false;
     }
+
     private boolean doesAntiDiagonalMatches(int row, int col){
         if (row - 2 >= 0 && col + 2 <= arraySize - 1)
             if (gameBoard[row - 2][col + 2] == gameBoard[row - 1][col + 1] && gameBoard[row - 1][col + 1] == gameBoard[row][col])
@@ -80,11 +99,21 @@ public class doNotConnectStonesStates {
         return false;
     }
 
+    /**
+     * This Method will check if the move is valid or not.
+     * @param row This is the Row number where stone will be placed.
+     * @param col This is the Column number where stone will be placed.
+     * @return {@code true} if the grid is empty and stone can be placed. {@code false} if the grid is not empty and stone can't be placed.
+     */
     public boolean isMoveValid(int row, int col){
         log.debug("Checking if Grid is Empty or not....");
         return gameBoard[row][col] == '-';
     }
 
+    /**
+     * This Method will check if whole {@code gameBoard} is filled or not. Which will check if game has Tied or not.
+     * @return {@code true} if the {@code gameBoard} is full and game has Tied. {@code false} if the grid is not full and game hasn't Tied yet.
+     */
     public boolean isGameBoardFilled(){
         log.debug("Checking if Board is Empty or not....");
         for (char[] chars : gameBoard) {
@@ -97,6 +126,17 @@ public class doNotConnectStonesStates {
         return true;
     }
 
+    /**
+     * This function will set the specific stone on {@code gameBoard}.
+     * Initially, {@code gameBoard} has dashed which states the place is empty.
+     * If player places a Red stone it will put a 'R' on {@code gameBoard} to indicate this place is taken by Red stone.
+     * If player places a Blue stone it will put a 'B' on {@code gameBoard} to indicate this place is taken by Blue stone.
+     * @param row This is the Row number where stone will be placed.
+     * @param col This is the Column number where stone will be placed.
+     * @param stone This is the stone that will be placed.
+     *              If player places a Red stone it will put a 'R' on {@code gameBoard} to indicate this place is taken by Red stone.
+     *              If player places a Blue stone it will put a 'B' on {@code gameBoard} to indicate this place is taken by Blue stone.
+     */
     public void setOnBoard(int row, int col, char stone){
         if(stone == 'R') {
             log.info("Setting a Red Stone on Board!");
@@ -105,38 +145,5 @@ public class doNotConnectStonesStates {
             log.info("Setting a Blue Stone on Board!");
         }
         gameBoard[row][col] = stone;
-    }
-
-    public static void main(String[] args) {
-        Scanner scan = new Scanner(System.in);
-        int row; int col, i = 1;
-
-        doNotConnectStonesStates testModel = new doNotConnectStonesStates();
-
-        do{
-            testModel.stateAfterMove();
-
-            if(i % 2 != 0){ System.out.println("\nPlayer # 01 Move: ");}
-            else{System.out.println("Player # 02 Move: ");}
-
-            do {
-                do {
-                    System.out.print("Enter Row: ");
-                    row = scan.nextInt();
-                    System.out.print("Enter Column: ");
-                    col = scan.nextInt();
-                } while ((row < 0 || row > 4) || (col < 0 || col > 4));
-
-                if (!testModel.isGameBoardFilled() && testModel.isMoveValid(row, col)) {
-                    if (i % 2 == 1) {testModel.setOnBoard(row, col, 'R');
-                    } else {testModel.setOnBoard(row, col, 'B');}
-                    i++;
-                } else {System.out.println("Invalid Move! Enter again: ");}
-            }while(testModel.isGameBoardFilled() || testModel.isMoveValid(row, col));
-
-        }while(testModel.isGameBoardFilled() || !testModel.isGameFinished(row, col));
-        log.info("Game Over!");
-        log.info("Board after gameOver state!");
-        testModel.stateAfterMove();
     }
 }
