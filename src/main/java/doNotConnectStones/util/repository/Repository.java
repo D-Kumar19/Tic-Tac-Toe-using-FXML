@@ -1,8 +1,8 @@
 package doNotConnectStones.util.repository;
 
+import java.util.List;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 import java.util.function.Predicate;
 
 public abstract class Repository<T> {
@@ -39,5 +39,4 @@ public abstract class Repository<T> {
     public List<T> findAll() {
         return Collections.unmodifiableList(elements);
     }
-
 }

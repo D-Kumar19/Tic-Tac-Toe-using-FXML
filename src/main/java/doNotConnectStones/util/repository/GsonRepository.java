@@ -1,18 +1,19 @@
 package doNotConnectStones.util.repository;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
-import doNotConnectStones.util.gson.LocalDateAdapter;
-import doNotConnectStones.util.gson.ZonedDateTimeAdapter;
-
 import java.io.File;
+import java.util.List;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.ZonedDateTime;
-import java.util.List;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
+
+import doNotConnectStones.util.gson.LocalDateAdapter;
+import doNotConnectStones.util.gson.ZonedDateTimeAdapter;
 
 public class GsonRepository<T> extends Repository<T> {
 
@@ -38,5 +39,4 @@ public class GsonRepository<T> extends Repository<T> {
             GSON.toJson(elements, writer);
         }
     }
-
 }
