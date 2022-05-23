@@ -1,15 +1,17 @@
 package doNotConnectStones.states;
 
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
 /**
  * This is the Class which will represent the states of the game.
  */
+@Data
 @Slf4j
 public class doNotConnectStonesStates {
 
-    private final int arraySize = 5;
-    private final char[][] gameBoard = new char[arraySize][arraySize];
+    private int arraySize = 5;
+    private char[][] gameBoard = new char[arraySize][arraySize];
 
     /**
      * This is Constructor for the {@code doNotConnectStates} class.

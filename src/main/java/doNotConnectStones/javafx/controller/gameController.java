@@ -229,6 +229,7 @@ public class gameController {
             log.info("Re-Match Button was Clicked....");
             log.info("Setting Board for Re-Match....");
             implementResetting();
+            resetButton.setText("Reset");
         }
     }
 

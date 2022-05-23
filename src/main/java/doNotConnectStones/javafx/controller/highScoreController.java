@@ -86,7 +86,7 @@ public class highScoreController {
             log.info("Sorting the List....");
             sortArrayList();
         } catch (FileNotFoundException e) {
-            log.error("No Previous record Found!!");
+            log.error("No Previous record Found!");
         }
     }
 
