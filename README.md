@@ -10,6 +10,7 @@
 - Game will ask for the **NAME** of **PLAYER NUMBER # 01** and **PLAYER NUMBER # 02**.
 - After entering the Names of the Players, user will **PRESS START** and then the Game will Start.
 - Game can only be played with **TWO PLAYERS**.
+- There will be a **RULES** button too which can be clicked to see all the Rules of the Game.
 
 ### During the Game:
 - At Start the Board will be **EMPTY**. 
