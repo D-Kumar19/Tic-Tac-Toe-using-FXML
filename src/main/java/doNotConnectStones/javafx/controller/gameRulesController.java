@@ -22,7 +22,7 @@ public class gameRulesController {
 
     public void previousPageButtonController(ActionEvent actionEvent) throws IOException {
         log.info("Previous Page Button was Clicked....");
-        log.info("Moving to Main-Menu Scene....");
+        log.info("Loading Main-Menu Scene....");
 
         fxmlLoader.setLocation(getClass().getResource("/fxml/mainMenu.fxml"));
         Parent mainMenuScene = fxmlLoader.load();

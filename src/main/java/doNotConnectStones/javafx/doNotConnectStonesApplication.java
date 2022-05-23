@@ -17,7 +17,7 @@ public class doNotConnectStonesApplication extends Application {
     @Override
     public void start(Stage mainMenuStage) throws Exception{
 
-        log.info("Loading Main Menu Scene!");
+        log.info("Loading Main Menu Scene....");
         Parent mainMenuScene = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/mainMenu.fxml")));
         mainMenuStage.setTitle("Do-not Connect Stones Main Menu");
         mainMenuStage.setScene(new Scene(mainMenuScene));

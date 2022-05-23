@@ -10,7 +10,7 @@ import lombok.Builder;
  */
 @Data
 @Builder
-public class highScoreTable {
+public class highScoreTableColumns {
     private String nameOfWinner;
     private Integer numberOfMoves;
     private Long numberOfWins;

@@ -1,5 +1,5 @@
 /**
- * This package provides help for the functionality of GSON to store the data in a Database.
- * And this also provides the functionality of {@code LocalDateAdapter} and {@code ZonedDateTimeAdapter}.
+ * This package provides the functionality of {@code LocalDateAdapter}, {@code ZonedDateTimeAdapter},
+ * and this also provides help for the functionality of GSON to store the data in a Database.
  */
 package doNotConnectStones.util;

@@ -26,8 +26,8 @@ import javafx.collections.ObservableList;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-import doNotConnectStones.resultsController.highScoreTable;
 import doNotConnectStones.resultsController.resultsRepository;
+import doNotConnectStones.resultsController.highScoreTableColumns;
 
 @Data
 @Slf4j
@@ -35,22 +35,22 @@ public class highScoreController {
 
     private final int n = 5;
     private final FXMLLoader fxmlLoader = new FXMLLoader();
-    List<highScoreTable> highScoreTableList = new ArrayList<>();
+    List<highScoreTableColumns> highScoreTableList = new ArrayList<>();
 
     @FXML
     private Button exitButton;
     @FXML
     private Button newGameButton;
     @FXML
-    private TableView<highScoreTable> tableView;
+    private TableView<highScoreTableColumns> tableView;
     @FXML
-    private TableColumn<highScoreTable, String> nameOfWinner;
+    private TableColumn<highScoreTableColumns, String> nameOfWinner;
     @FXML
-    private TableColumn<highScoreTable, Integer> numberOfMoves;
+    private TableColumn<highScoreTableColumns, Integer> numberOfMoves;
     @FXML
-    private TableColumn<highScoreTable, Long> numberOfWins;
+    private TableColumn<highScoreTableColumns, Long> numberOfWins;
     @FXML
-    private TableColumn<highScoreTable, String> zonedDateTime;
+    private TableColumn<highScoreTableColumns, String> zonedDateTime;
 
     @FXML
     private void initialize() throws IOException{
@@ -63,7 +63,7 @@ public class highScoreController {
 
         log.info("Extracting Top 5 Players....");
         getTop5Players();
-        ObservableList<highScoreTable> observableList = FXCollections.observableArrayList();
+        ObservableList<highScoreTableColumns> observableList = FXCollections.observableArrayList();
         observableList.addAll(highScoreTableList);
         tableView.setItems(observableList);
     }
@@ -74,9 +74,9 @@ public class highScoreController {
             repository.loadFromFile(resultsRepository.file);
             var mapPlayersAndWins = repository.mapAllWinningPlayers();
             mapPlayersAndWins.forEach((nameOfPlayer, numberOfWins)->{
-                highScoreTable singlePlayerScore = highScoreTable.builder()
+                highScoreTableColumns singlePlayerScore = highScoreTableColumns.builder()
                         .nameOfWinner(nameOfPlayer)
-                        .numberOfMoves(repository.getLatestMoves(nameOfPlayer))
+                        .numberOfMoves(repository.getLeastMoves(nameOfPlayer))
                         .numberOfWins(numberOfWins)
                         .zonedDateTime(repository.getLatestTime(nameOfPlayer))
                         .build();
@@ -91,7 +91,7 @@ public class highScoreController {
     }
 
     private void sortArrayList(){
-        Comparator<highScoreTable> sortPlayersWithWinsAndMoves = (entity1, entity2) -> {
+        Comparator<highScoreTableColumns> sortPlayersWithWinsAndMoves = (entity1, entity2) -> {
             if(entity2.getNumberOfWins().equals(entity1.getNumberOfWins())){
                 return Long.compare(entity1.getNumberOfMoves(), entity2.getNumberOfMoves());
             }
@@ -107,7 +107,7 @@ public class highScoreController {
     }
 
     public void newGameButtonController(ActionEvent actionEvent) throws IOException {
-        log.info("New Game Button was Clicked!");
+        log.info("New Game Button was Clicked....");
         log.info("Restarting the Game....");
 
         fxmlLoader.setLocation(getClass().getResource("/fxml/mainMenu.fxml"));
@@ -123,14 +123,14 @@ public class highScoreController {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         log.info("Exit Button was Clicked....");
 
-        alert.setTitle("Error!");
+        alert.setTitle("Confirmation Message!");
         alert.setHeaderText("ARE YOU SURE YOU WANT TO EXIT!");
         alert.showAndWait();
 
         if (alert.getResult() == ButtonType.OK) {
             log.info("The Game has been Exited....");
             log.warn("Closing Application....");
-            log.info("Thanks for Playing the Game!");
+            log.info("Thanks for Playing this Application!");
             Platform.exit();
         }
         else{

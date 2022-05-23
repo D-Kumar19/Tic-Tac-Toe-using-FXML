@@ -80,6 +80,7 @@ public class gameController {
     }
 
     private StackPane createSquare() {
+        log.debug("Creating a Square on the Grid....");
         var square = new StackPane();
         square.getStyleClass().add("square");
         var circle = new Circle(50);
@@ -103,14 +104,14 @@ public class gameController {
 
         log.info("Game has been Successfully Reset!");
         log.info("New Game State is:");
-        gameStates.stateAfterMove();
+        log.info("{}\n", (Object) gameStates.getGameBoard());
 
         Platform.runLater(() -> welcomeText.setText("Good Luck " + player1Name + " and " + player2Name + "!"));
         Platform.runLater(() -> playerTurnText.setText(player1Name + "'s Turn!"));
     }
 
     public void checkIfGameFinished(int row, int col, int playerTurn) {
-        if (gameStates.isGameFinished(row, col)) {
+        if (gameStates.hasGameFinished(row, col)) {
             log.info("Game Over!");
             isGameOver.setValue(true);
 
@@ -137,7 +138,7 @@ public class gameController {
     public void checkIfGameTied() {
         if (gameStates.isGameBoardFilled()) {
             isGameOver.setValue(true);
-            log.info("It is a Tie between {} and {}!", player1Name, player2Name);
+            log.info("It is a Tie between {} and {}! Congratulations both!", player1Name, player2Name);
 
             playerTurnText.setText("");
             finishButton.setText("Finish");
@@ -148,14 +149,13 @@ public class gameController {
 
     private void clearAllNodes() {
         log.debug("Clearing all Nodes....");
+        log.info("Resetting the Nodes to Default....");
         boardGrid.getChildren().stream()
                 .filter(node -> !Objects.equals(node.getTypeSelector(), "Group"))
                 .forEach(node -> {
                     var circle = (Circle) ((StackPane) node).getChildren().get(0);
                     circle.setFill(Color.TRANSPARENT);
                 });
-
-        log.info("Resetting the Nodes to Default....");
     }
 
     private void handleMouseClick(MouseEvent mouseEvent) {
@@ -170,7 +170,8 @@ public class gameController {
                 circle.setFill(findPlayerColor((Color) circle.getFill(), row, col));
 
                 log.info("States after placing a Stone:");
-                gameStates.stateAfterMove();
+                log.info("{}\n", (Object) gameStates.getGameBoard());
+
             } else {
                 log.warn("User just clicked on [{},{}] cell and isMoveValid is false", row, col);
             }
@@ -190,6 +191,8 @@ public class gameController {
             playerTurn = 1;
             color = Color.RED;
             gameStates.setOnBoard(row, col, 'R');
+            log.info("Setting a Red Stone on Board at [{},{}]!", row, col);
+
             playerTurnText.setText(player2Name + "'s Turn!");
             player1Steps.setValue(player1Steps.getValue() + 1);
 
@@ -197,6 +200,8 @@ public class gameController {
             playerTurn = 0;
             color = Color.BLUE;
             gameStates.setOnBoard(row, col, 'B');
+            log.info("Setting a Blue Stone on Board at [{},{}]!", row, col);
+
             playerTurnText.setText(player1Name + "'s Turn!");
             player2Steps.setValue(player2Steps.getValue() + 1);
         }
@@ -212,14 +217,15 @@ public class gameController {
             log.info("Reset Button was Clicked....");
             log.debug("Resetting Game....");
 
-            alert.setTitle("Error!");
+            alert.setTitle("Confirmation Message!");
             alert.setHeaderText("ARE YOU SURE YOU WANT TO RESET THE GAME!");
             alert.setContentText("If you click 'OK' your progress will not be saved!");
             alert.showAndWait();
 
             if (alert.getResult() == ButtonType.OK) {
                 log.info("Final States before Reset:");
-                gameStates.stateAfterMove();
+                log.info("{}\n", (Object) gameStates.getGameBoard());
+
                 implementResetting();
             }
             else{
@@ -234,6 +240,7 @@ public class gameController {
     }
 
     public void implementResetting(){
+        log.debug("Resetting all User Progress and Nodes!");
         clearAllNodes();
         resetUserDetails();
     }
@@ -244,7 +251,7 @@ public class gameController {
             log.info("Gave Up Button was Clicked....");
             log.debug("Game Given up....");
 
-            alert.setTitle("Error!");
+            alert.setTitle("Confirmation Message!");
             alert.setHeaderText("ARE YOU SURE YOU WANT TO LEAVE THE GAME IN-BETWEEN!");
             alert.setContentText("If you click 'OK' your progress will not be saved!");
             alert.showAndWait();
@@ -264,7 +271,7 @@ public class gameController {
     }
 
     public void implementFinishing(ActionEvent actionEvent) throws IOException {
-        log.debug("Loading highScore Table....");
+        log.debug("Loading HighScore Table....");
         isGameOver.setValue(true);
 
         fxmlLoader.setLocation(getClass().getResource("/fxml/highScores.fxml"));
@@ -294,14 +301,14 @@ public class gameController {
                 repository.loadFromFile(resultsRepository.file);
                 log.info("Previous File Found. Storing Data in the Previous File....");
             }catch(FileNotFoundException e){
-                log.info("No previous file found!");
+                log.info("No Previous File Found!");
             } catch (IOException e) {
-                log.error("Unable to open previous file!");
+                log.error("Unable to Open Previous File!");
             }
             repository.add(result);
             try {
                 repository.saveToFile(resultsRepository.file);
-                log.info("Results added to File Successfully!");
+                log.info("Results saved to File Successfully!");
             } catch (IOException e){
                 log.error("Unable to Save results to file!");
             }

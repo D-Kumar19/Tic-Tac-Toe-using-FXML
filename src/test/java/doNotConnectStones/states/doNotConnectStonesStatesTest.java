@@ -7,37 +7,6 @@ import static org.junit.jupiter.api.Assertions.*;
 class doNotConnectStonesStatesTest {
 
     @Test
-    void stateAfterMove() {
-        doNotConnectStonesStates stonesStates = new doNotConnectStonesStates();
-        stonesStates.setGameBoard(new char[][]{
-                {'R','B','R','B','R'},
-                {'R','B','R','B','R'},
-                {'B','-','R','-','B'},
-                {'B','R','B','R','B'},
-                {'R','B','R','B','R'}});
-        assertArrayEquals(new char[][]{
-                {'R','B','R','B','R'},
-                {'R','B','R','B','R'},
-                {'B','-','R','-','B'},
-                {'B','R','B','R','B'},
-                {'R','B','R','B','R'}}, stonesStates.getGameBoard());
-
-        stonesStates = new doNotConnectStonesStates();
-        stonesStates.setGameBoard(new char[][]{
-                {'R','B','R','B','R'},
-                {'R','B','R','B','R'},
-                {'B','-','R','-','B'},
-                {'B','R','B','R','B'},
-                {'R','B','R','B','R'}});
-        assertArrayEquals(new char[][]{
-                {'R','B','R','B','R'},
-                {'R','B','R','B','R'},
-                {'B','-','R','-','B'},
-                {'B','R','B','R','B'},
-                {'R','B','R','B','R'}}, stonesStates.getGameBoard());
-    }
-
-    @Test
     void isGameFinished() {
         doNotConnectStonesStates stonesStates = new doNotConnectStonesStates();
         stonesStates.setGameBoard(new char[][]{
@@ -46,7 +15,7 @@ class doNotConnectStonesStatesTest {
                 {'B','-','R','-','B'},
                 {'B','R','B','R','B'},
                 {'R','B','R','B','R'}});
-        assertTrue(stonesStates.isGameFinished(1, 2));
+        assertTrue(stonesStates.hasGameFinished(1, 2));
 
         stonesStates = new doNotConnectStonesStates();
         stonesStates.setGameBoard(new char[][]{
@@ -55,7 +24,7 @@ class doNotConnectStonesStatesTest {
                 {'B','-','R','-','B'},
                 {'B','R','B','R','B'},
                 {'R','B','R','B','R'}});
-        assertTrue(stonesStates.isGameFinished(2, 2));
+        assertTrue(stonesStates.hasGameFinished(2, 2));
 
         stonesStates = new doNotConnectStonesStates();
         stonesStates.setGameBoard(new char[][]{
@@ -64,7 +33,7 @@ class doNotConnectStonesStatesTest {
                 {'B','-','R','-','B'},
                 {'B','R','B','R','B'},
                 {'R','B','R','B','R'}});
-        assertTrue(stonesStates.isGameFinished(0, 2));
+        assertTrue(stonesStates.hasGameFinished(0, 2));
 
         stonesStates = new doNotConnectStonesStates();
         stonesStates.setGameBoard(new char[][]{
@@ -73,7 +42,7 @@ class doNotConnectStonesStatesTest {
                 {'B','-','B','-','B'},
                 {'B','R','B','R','B'},
                 {'R','B','R','B','R'}});
-        assertFalse(stonesStates.isGameFinished(1, 2));
+        assertFalse(stonesStates.hasGameFinished(1, 2));
 
         stonesStates = new doNotConnectStonesStates();
         stonesStates.setGameBoard(new char[][]{
@@ -82,7 +51,7 @@ class doNotConnectStonesStatesTest {
                 {'B','-','B','-','B'},
                 {'B','R','B','R','B'},
                 {'R','B','R','B','R'}});
-        assertFalse(stonesStates.isGameFinished(2, 2));
+        assertFalse(stonesStates.hasGameFinished(2, 2));
 
         stonesStates = new doNotConnectStonesStates();
         stonesStates.setGameBoard(new char[][]{
@@ -91,7 +60,7 @@ class doNotConnectStonesStatesTest {
                 {'B','-','B','-','B'},
                 {'B','R','B','R','B'},
                 {'R','B','R','B','R'}});
-        assertFalse(stonesStates.isGameFinished(0, 2));
+        assertFalse(stonesStates.hasGameFinished(0, 2));
 
         stonesStates = new doNotConnectStonesStates();
         stonesStates.setGameBoard(new char[][]{
@@ -100,7 +69,7 @@ class doNotConnectStonesStatesTest {
                 {'-','B','B','B','-'},
                 {'B','R','B','R','B'},
                 {'R','B','R','B','R'}});
-        assertTrue(stonesStates.isGameFinished(2, 2));
+        assertTrue(stonesStates.hasGameFinished(2, 2));
 
         stonesStates = new doNotConnectStonesStates();
         stonesStates.setGameBoard(new char[][]{
@@ -109,7 +78,7 @@ class doNotConnectStonesStatesTest {
                 {'-','B','B','B','-'},
                 {'B','R','B','R','B'},
                 {'R','B','R','B','R'}});
-        assertTrue(stonesStates.isGameFinished(2, 1));
+        assertTrue(stonesStates.hasGameFinished(2, 1));
 
         stonesStates = new doNotConnectStonesStates();
         stonesStates.setGameBoard(new char[][]{
@@ -118,7 +87,7 @@ class doNotConnectStonesStatesTest {
                 {'-','B','B','B','-'},
                 {'B','R','B','R','B'},
                 {'R','B','R','B','R'}});
-        assertTrue(stonesStates.isGameFinished(2, 3));
+        assertTrue(stonesStates.hasGameFinished(2, 3));
 
         stonesStates = new doNotConnectStonesStates();
         stonesStates.setGameBoard(new char[][]{
@@ -127,7 +96,7 @@ class doNotConnectStonesStatesTest {
                 {'B','B','R','B','-'},
                 {'B','R','-','-','B'},
                 {'R','B','R','B','R'}});
-        assertFalse(stonesStates.isGameFinished(2, 1));
+        assertFalse(stonesStates.hasGameFinished(2, 1));
 
         stonesStates = new doNotConnectStonesStates();
         stonesStates.setGameBoard(new char[][]{
@@ -136,7 +105,7 @@ class doNotConnectStonesStatesTest {
                 {'B','B','R','-','B'},
                 {'B','R','-','-','B'},
                 {'R','B','R','B','R'}});
-        assertFalse(stonesStates.isGameFinished(2, 0));
+        assertFalse(stonesStates.hasGameFinished(2, 0));
 
         stonesStates = new doNotConnectStonesStates();
         stonesStates.setGameBoard(new char[][]{
@@ -145,7 +114,7 @@ class doNotConnectStonesStatesTest {
                 {'B','B','R','B','-'},
                 {'B','-','-','-','B'},
                 {'R','B','R','B','R'}});
-        assertFalse(stonesStates.isGameFinished(2, 2));
+        assertFalse(stonesStates.hasGameFinished(2, 2));
 
         stonesStates = new doNotConnectStonesStates();
         stonesStates.setGameBoard(new char[][]{
@@ -154,7 +123,7 @@ class doNotConnectStonesStatesTest {
                 {'-','B','R','B','-'},
                 {'B','-','B','-','B'},
                 {'R','B','R','B','-'}});
-        assertTrue(stonesStates.isGameFinished(0, 0));
+        assertTrue(stonesStates.hasGameFinished(0, 0));
 
         stonesStates = new doNotConnectStonesStates();
         stonesStates.setGameBoard(new char[][]{
@@ -163,7 +132,7 @@ class doNotConnectStonesStatesTest {
                 {'-','B','R','B','-'},
                 {'B','-','B','-','B'},
                 {'R','B','R','B','-'}});
-        assertTrue(stonesStates.isGameFinished(1, 1));
+        assertTrue(stonesStates.hasGameFinished(1, 1));
 
         stonesStates = new doNotConnectStonesStates();
         stonesStates.setGameBoard(new char[][]{
@@ -172,7 +141,7 @@ class doNotConnectStonesStatesTest {
                 {'-','B','R','B','-'},
                 {'B','-','B','-','B'},
                 {'R','B','R','B','-'}});
-        assertTrue(stonesStates.isGameFinished(2, 2));
+        assertTrue(stonesStates.hasGameFinished(2, 2));
 
         stonesStates = new doNotConnectStonesStates();
         stonesStates.setGameBoard(new char[][]{
@@ -181,7 +150,7 @@ class doNotConnectStonesStatesTest {
                 {'-','-','R','-','-'},
                 {'B','-','B','-','B'},
                 {'R','B','R','B','-'}});
-        assertFalse(stonesStates.isGameFinished(1, 2));
+        assertFalse(stonesStates.hasGameFinished(1, 2));
 
         stonesStates = new doNotConnectStonesStates();
         stonesStates.setGameBoard(new char[][]{
@@ -190,7 +159,7 @@ class doNotConnectStonesStatesTest {
                 {'-','-','R','-','-'},
                 {'B','-','B','-','B'},
                 {'R','B','R','B','-'}});
-        assertFalse(stonesStates.isGameFinished(3, 2));
+        assertFalse(stonesStates.hasGameFinished(3, 2));
 
         stonesStates = new doNotConnectStonesStates();
         stonesStates.setGameBoard(new char[][]{
@@ -199,7 +168,7 @@ class doNotConnectStonesStatesTest {
                 {'B','B','-','B','-'},
                 {'B','-','-','R','B'},
                 {'R','B','R','B','R'}});
-        assertFalse(stonesStates.isGameFinished(4, 4));
+        assertFalse(stonesStates.hasGameFinished(4, 4));
 
         stonesStates = new doNotConnectStonesStates();
         stonesStates.setGameBoard(new char[][]{
@@ -208,7 +177,7 @@ class doNotConnectStonesStatesTest {
                 {'-','B','R','B','-'},
                 {'B','R','B','-','B'},
                 {'R','B','R','B','-'}});
-        assertTrue(stonesStates.isGameFinished(4, 0));
+        assertTrue(stonesStates.hasGameFinished(4, 0));
 
         stonesStates = new doNotConnectStonesStates();
         stonesStates.setGameBoard(new char[][]{
@@ -217,7 +186,7 @@ class doNotConnectStonesStatesTest {
                 {'-','B','R','B','-'},
                 {'B','R','B','-','B'},
                 {'R','B','R','B','-'}});
-        assertTrue(stonesStates.isGameFinished(3, 1));
+        assertTrue(stonesStates.hasGameFinished(3, 1));
 
         stonesStates = new doNotConnectStonesStates();
         stonesStates.setGameBoard(new char[][]{
@@ -226,7 +195,7 @@ class doNotConnectStonesStatesTest {
                 {'-','B','R','B','-'},
                 {'B','R','B','-','B'},
                 {'R','B','R','B','-'}});
-        assertTrue(stonesStates.isGameFinished(2, 2));
+        assertTrue(stonesStates.hasGameFinished(2, 2));
 
         stonesStates = new doNotConnectStonesStates();
         stonesStates.setGameBoard(new char[][]{
@@ -235,7 +204,7 @@ class doNotConnectStonesStatesTest {
                 {'-','B','R','B','-'},
                 {'B','-','B','-','B'},
                 {'R','B','R','B','-'}});
-        assertFalse(stonesStates.isGameFinished(4, 0));
+        assertFalse(stonesStates.hasGameFinished(4, 0));
 
         stonesStates = new doNotConnectStonesStates();
         stonesStates.setGameBoard(new char[][]{
@@ -244,7 +213,7 @@ class doNotConnectStonesStatesTest {
                 {'-','B','R','B','-'},
                 {'B','R','B','-','B'},
                 {'-','B','R','B','-'}});
-        assertFalse(stonesStates.isGameFinished(3, 1));
+        assertFalse(stonesStates.hasGameFinished(3, 1));
 
         stonesStates = new doNotConnectStonesStates();
         stonesStates.setGameBoard(new char[][]{
@@ -253,7 +222,7 @@ class doNotConnectStonesStatesTest {
                 {'-','B','R','B','-'},
                 {'B','R','B','-','B'},
                 {'-','B','R','B','-'}});
-        assertFalse(stonesStates.isGameFinished(2, 2));
+        assertFalse(stonesStates.hasGameFinished(2, 2));
     }
 
     @Test
@@ -305,11 +274,11 @@ class doNotConnectStonesStatesTest {
 
         stonesStates = new doNotConnectStonesStates();
         stonesStates.setGameBoard(new char[][]{
-                        {'R','B','R','B','R'},
-                        {'R','B','R','B','R'},
-                        {'B','R','B','R','B'},
-                        {'B','R','B','R','B'},
-                        {'R','B','R','B','R'}});
+                {'R','B','R','B','R'},
+                {'R','B','R','B','R'},
+                {'B','R','B','R','B'},
+                {'B','R','B','R','B'},
+                {'R','B','R','B','R'}});
         assertTrue(stonesStates.isGameBoardFilled());
 
         stonesStates = new doNotConnectStonesStates();
@@ -343,27 +312,27 @@ class doNotConnectStonesStatesTest {
     @Test
     void setOnBoard() {
         doNotConnectStonesStates stonesStates = new doNotConnectStonesStates();
-        stonesStates.setOnBoard('1', '2', 'B');
+        stonesStates.setOnBoard(1, 2, 'B');
         var arrayOfStones = stonesStates.getGameBoard();
         assertEquals('B', arrayOfStones[1][2]);
 
         stonesStates = new doNotConnectStonesStates();
-        stonesStates.setOnBoard('2', '4', 'R');
+        stonesStates.setOnBoard(2, 4, 'R');
         arrayOfStones = stonesStates.getGameBoard();
         assertEquals('R', arrayOfStones[2][4]);
 
         stonesStates = new doNotConnectStonesStates();
-        stonesStates.setOnBoard('2', '2', 'R');
+        stonesStates.setOnBoard(2, 2, 'R');
         arrayOfStones = stonesStates.getGameBoard();
         assertEquals('R', arrayOfStones[2][2]);
 
         stonesStates = new doNotConnectStonesStates();
-        stonesStates.setOnBoard('0', '0', 'B');
+        stonesStates.setOnBoard(0, 0, 'B');
         arrayOfStones = stonesStates.getGameBoard();
         assertEquals('B', arrayOfStones[0][0]);
 
         stonesStates = new doNotConnectStonesStates();
-        stonesStates.setOnBoard('3', '4', 'R');
+        stonesStates.setOnBoard(3, 4, 'R');
         arrayOfStones = stonesStates.getGameBoard();
         assertEquals('R', arrayOfStones[3][4]);
     }

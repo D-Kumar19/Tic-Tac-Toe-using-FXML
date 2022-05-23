@@ -28,29 +28,29 @@ public class mainMenuController {
     private TextField player2Name;
 
     public void switchMainMenuToGameScene(ActionEvent actionEvent) throws  IOException {
-        log.debug("User just clicked Start!");
+        log.info("User just clicked Start....");
         Alert alert = new Alert(Alert.AlertType.ERROR);
 
         if (player1Name.getText().isEmpty() && player2Name.getText().isEmpty()) {
-            log.warn("You haven't entered any Player's Name!");
+            log.error("You haven't entered any Player's Name!");
 
-            alert.setTitle("Error!");
+            alert.setTitle("Error Message!");
             alert.setHeaderText("YOU HAVEN'T ENTERED ANY NAMES!");
             alert.setContentText("Please Enter Names: ");
             alert.showAndWait();
         }
         else if (player1Name.getText().isEmpty()) {
-            log.warn("You have entered only Player Two's Name!");
+            log.error("You have entered only Player Two's Name!");
 
-            alert.setTitle("Error!");
+            alert.setTitle("Error Message!");
             alert.setHeaderText("YOU HAVEN'T ENTERED PLAYER # 01 NAME!");
             alert.setContentText("Please Enter Player # 01 Name: ");
             alert.showAndWait();
         }
         else if (player2Name.getText().isEmpty()) {
-            log.warn("You have entered only Player One's Name!");
+            log.error("You have entered only Player One's Name!");
 
-            alert.setTitle("Error!");
+            alert.setTitle("Error Message!");
             alert.setHeaderText("YOU HAVEN'T ENTERED PLAYER # 02 NAME!");
             alert.setContentText("Please Enter Player # 02 Name: ");
             alert.showAndWait();
@@ -59,7 +59,7 @@ public class mainMenuController {
             log.warn("You have entered same Names of Both Players!");
 
             alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Error!");
+            alert.setTitle("Confirmation Message!");
             alert.setHeaderText("YOU HAVE ENTERED SAME NAMES!");
             alert.setContentText("Are you sure you want to start game with same names: ");
             alert.showAndWait();
@@ -79,7 +79,7 @@ public class mainMenuController {
         log.info("Name of the Player # 01 is: {}!", player1Name.getText());
         log.info("Name of the Player # 02 is: {}!", player2Name.getText());
 
-        log.info("Loading gameScene....");
+        log.info("Loading Game Scene....");
         Parent gameScene = fxmlLoader.load();
         fxmlLoader.<gameController>getController().setPlayer1Name(player1Name.getText());
         fxmlLoader.<gameController>getController().setPlayer2Name(player2Name.getText());
@@ -92,7 +92,7 @@ public class mainMenuController {
 
     public void changeMainMenuSceneToRulesScene(ActionEvent actionEvent) throws IOException {
         fxmlLoader.setLocation(getClass().getResource("/fxml/gameRules.fxml"));
-        log.info("Rules Button was clicked....");
+        log.info("Rules Button was Clicked....");
         log.info("Loading Game Rules....");
 
         Parent gameScene = fxmlLoader.load();
