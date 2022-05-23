@@ -37,7 +37,7 @@
             </Blend>
          </effect>
       </Text>
-      <TableView fx:id="tableView" layoutX="7.0" layoutY="125.0" prefHeight="250.0" prefWidth="699.0">
+      <TableView fx:id="tableView" layoutX="7.0" layoutY="125.0" prefHeight="250.0" prefWidth="699.0" stylesheets="@UIOfHighScoreTable.css">
         <columns>
           <TableColumn fx:id="nameOfWinner" prefWidth="270.0" text="Winner's Name" />
           <TableColumn fx:id="numberOfMoves" minWidth="0.0" prefWidth="130.0" text="Number of Moves" />

@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="734.0" prefWidth="723.0" style="-fx-background-color: E3FCBF;" stylesheets="@UI.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="doNotConnectStones.javafx.controller.gameController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="734.0" prefWidth="723.0" style="-fx-background-color: E3FCBF;" stylesheets="@UIOfGridBox.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="doNotConnectStones.javafx.controller.gameController">
    <children>
       <Text fill="#2155cd" layoutX="89.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DO NOT CONNECT STONES" textAlignment="CENTER">
          <font>
@@ -48,7 +48,7 @@
             </InnerShadow>
          </effect>
       </Text>
-      <GridPane fx:id="boardGrid" gridLinesVisible="true" layoutX="7.0" layoutY="145.0" prefHeight="524.0" prefWidth="709.0" stylesheets="@UI.css">
+      <GridPane fx:id="boardGrid" gridLinesVisible="true" layoutX="7.0" layoutY="145.0" prefHeight="524.0" prefWidth="709.0" stylesheets="@UIOfGridBox.css">
         <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
