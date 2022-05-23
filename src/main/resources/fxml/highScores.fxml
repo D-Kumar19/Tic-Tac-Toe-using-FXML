@@ -39,10 +39,10 @@
       </Text>
       <TableView fx:id="tableView" layoutX="7.0" layoutY="125.0" prefHeight="250.0" prefWidth="699.0" stylesheets="@UIOfHighScoreTable.css">
         <columns>
-          <TableColumn fx:id="nameOfWinner" prefWidth="270.0" text="Winner's Name" />
-          <TableColumn fx:id="numberOfMoves" minWidth="0.0" prefWidth="130.0" text="Number of Moves" />
-            <TableColumn fx:id="numberOfWins" prefWidth="101.0" text="Total Wins" />
-            <TableColumn fx:id="zonedDateTime" prefWidth="196.0" text="Local Time" />
+          <TableColumn fx:id="nameOfWinner" prefWidth="240.0" text="Winner's Name" />
+          <TableColumn fx:id="numberOfMoves" minWidth="0.0" prefWidth="114.0" text="Number of Moves" />
+            <TableColumn fx:id="numberOfWins" text="Total Wins" />
+            <TableColumn fx:id="zonedDateTime" prefWidth="263.0" text="Local Time" />
         </columns>
          <effect>
             <InnerShadow />
