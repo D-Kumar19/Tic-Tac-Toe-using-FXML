@@ -96,7 +96,7 @@ public class MainMenuController {
      * @throws IOException If Program is not able to find the {@code MainGame} or it is not defined then it will throw an Error.
      */
     public void changeMainMenuSceneToGameScene(ActionEvent actionEvent) throws IOException {
-        fxmlLoader.setLocation(getClass().getResource("/fxml/MainGame.fxml"));
+        fxmlLoader.setLocation(getClass().getResource("/FXML/MainGame.fxml"));
         log.info("You have entered both Player's Name correctly....");
         log.info("Name of the Player # 01 is: {}!", player1Name.getText());
         log.info("Name of the Player # 02 is: {}!", player2Name.getText());
@@ -119,7 +119,7 @@ public class MainMenuController {
      * @throws IOException If Program is not able to find the {@code GameRules} or it is not defined then it will throw an Error.
      */
     public void changeMainMenuSceneToRulesScene(ActionEvent actionEvent) throws IOException {
-        fxmlLoader.setLocation(getClass().getResource("/fxml/GameRules.fxml"));
+        fxmlLoader.setLocation(getClass().getResource("/FXML/GameRules.fxml"));
         log.info("Rules Button was Clicked....");
         log.info("Loading Game Rules....");
 
@@ -138,7 +138,7 @@ public class MainMenuController {
      * @throws IOException If Program is not able to find the {@code HighScores} or it is not defined then it will throw an Error.
      */
     public void changeMainMenuSceneToHighScoreScene(ActionEvent actionEvent) throws IOException {
-        fxmlLoader.setLocation(getClass().getResource("/fxml/HighScores.fxml"));
+        fxmlLoader.setLocation(getClass().getResource("/FXML/HighScores.fxml"));
         log.info("High Scores Button was Clicked....");
         log.info("Loading High Score Table....");
 

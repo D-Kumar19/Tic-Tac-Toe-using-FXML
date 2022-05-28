@@ -385,7 +385,7 @@ public class GameController {
     public void implementFinishing(ActionEvent actionEvent) throws IOException {
         log.debug("Loading HighScore Table....");
 
-        fxmlLoader.setLocation(getClass().getResource("/fxml/HighScores.fxml"));
+        fxmlLoader.setLocation(getClass().getResource("/FXML/HighScores.fxml"));
         Parent highScoreScene = fxmlLoader.load();
         Stage highScoreStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         highScoreStage.setTitle("Do-not Connect Stones Main Menu");

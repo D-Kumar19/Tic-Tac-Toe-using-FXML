@@ -29,7 +29,7 @@ public class GameRulesController {
         log.info("Previous Page Button was Clicked....");
         log.info("Loading Main-Menu Scene....");
 
-        fxmlLoader.setLocation(getClass().getResource("/fxml/MainMenu.fxml"));
+        fxmlLoader.setLocation(getClass().getResource("/FXML/MainMenu.fxml"));
         Parent mainMenuScene = fxmlLoader.load();
         Stage mainMenuStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         mainMenuStage.setTitle("Do-not Connect Stones Main Menu");

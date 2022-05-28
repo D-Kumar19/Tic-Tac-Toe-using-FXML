@@ -26,7 +26,7 @@ public class TicTacToeApplication extends Application {
     public void start(Stage mainMenuStage) throws Exception{
 
         log.info("Loading Main Menu Scene....");
-        Parent mainMenuScene = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/MainMenu.fxml")));
+        Parent mainMenuScene = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/FXML/MainMenu.fxml")));
         mainMenuStage.setTitle("Tic-Tac-Toe Main Menu");
         mainMenuStage.setScene(new Scene(mainMenuScene));
         mainMenuStage.setResizable(false);

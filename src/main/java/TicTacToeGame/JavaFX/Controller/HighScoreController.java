@@ -87,7 +87,7 @@ public class HighScoreController {
         log.info("New Game Button was Clicked....");
         log.info("Restarting the Game....");
 
-        fxmlLoader.setLocation(getClass().getResource("/fxml/MainMenu.fxml"));
+        fxmlLoader.setLocation(getClass().getResource("/FXML/MainMenu.fxml"));
         Parent mainMenuScene = fxmlLoader.load();
         Stage mainMenuStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         mainMenuStage.setTitle("Do-not Connect Stones Main Menu");
